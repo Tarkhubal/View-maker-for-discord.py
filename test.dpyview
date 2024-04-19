@@ -1,0 +1,77 @@
+[view1:view]
+> button1 {view2}
+ | label: Button 1
+ | emoji: 🔴
+ | row: 2
+ * embed1
+ * content1
+> button2 {view3}
+ | label: Bouton 2 omg
+ | row: 1
+ * embed2
+
+---
+
+[embed1:embed]
+$ content
+ | title: help
+ | description: yes
+ | color: #ff0000
+ | url: https://google.com
+ | timestamp: 2024-04-17 20:46:21.343038
+$ footer
+ | img: https://fl-img-media.s3.amazonaws.com/uploads/2017/01/IMG-LOGO-TRANSPARENT-FULL.png
+ | text: bruh
+$ author
+ | text: nope
+$ field
+ | name: field1
+ | value: value1
+ | inline: True
+$ field
+ | name: field2
+ | value: value2
+ | inline: False
+$ field
+ | name: field3
+ | value: value3
+ | inline: False
+$ medias
+ | thumbnail: https://fl-img-media.s3.amazonaws.com/uploads/2017/01/IMG-LOGO-TRANSPARENT-FULL.png
+ | video: https://sample-videos.com/video321/mp4/720/big_buck_bunny_720p_1mb.mp4
+ | image: https://fl-img-media.s3.amazonaws.com/uploads/2017/01/IMG-LOGO-TRANSPARENT-FULL.png
+
+---
+
+[content1:content]
+:start
+Bonjour je suis le contenu
+
+Avec un saut de ligne
+:end
+
+---
+
+[embed2:embed]
+$ content
+ | title: help
+ | description: yes
+ | color: #ff0000
+
+---
+
+[view2:view]
+> button1 {view3}
+ | row: 1
+ | label: Button 1
+ * embed2
+
+---
+
+[view3:view]
+> button1 {}
+ | row: 1
+ | label: Bouton 1
+ * content1
+
+---

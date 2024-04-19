@@ -1,0 +1,110 @@
+{
+    "view1": {
+        "type": "view",
+        "components": [
+            {
+                "type": "button",
+                "name": "button1",
+                "action": "view2",
+                "label": "Button 1",
+                "emoji": "🔴",
+                "row": "2",
+                "with": [
+                    "embed1",
+                    "content1"
+                ]
+            },
+            {
+                "type": "button",
+                "name": "button2",
+                "action": "view3",
+                "label": "Bouton 2 omg",
+                "row": "1",
+                "with": [
+                    "embed2"
+                ]
+            }
+        ]
+    },
+    "embed1": {
+        "type": "embed",
+        "content": {
+            "title": "help",
+            "description": "yes",
+            "color": "#ff0000",
+            "url": "https://google.com",
+            "timestamp": "2024-04-17 20:46:21.343038"
+        },
+        "footer": {
+            "img": "https://fl-img-media.s3.amazonaws.com/uploads/2017/01/IMG-LOGO-TRANSPARENT-FULL.png",
+            "text": "bruh"
+        },
+        "author": {
+            "text": "nope"
+        },
+        "fields": [
+            {
+                "name": "field1",
+                "value": "value1",
+                "inline": true
+            },
+            {
+                "name": "field2",
+                "value": "value2",
+                "inline": false
+            },
+            {
+                "name": "field3",
+                "value": "value3",
+                "inline": false
+            }
+        ],
+        "medias": {
+            "thumbnail": "https://fl-img-media.s3.amazonaws.com/uploads/2017/01/IMG-LOGO-TRANSPARENT-FULL.png",
+            "video": "https://sample-videos.com/video321/mp4/720/big_buck_bunny_720p_1mb.mp4",
+            "image": "https://fl-img-media.s3.amazonaws.com/uploads/2017/01/IMG-LOGO-TRANSPARENT-FULL.png"
+        }
+    },
+    "content1": {
+        "type": "content",
+        "content": "Bonjour je suis le contenu\n\nAvec un saut de ligne"
+    },
+    "embed2": {
+        "type": "embed",
+        "content": {
+            "title": "help",
+            "description": "yes",
+            "color": "#ff0000"
+        }
+    },
+    "view2": {
+        "type": "view",
+        "components": [
+            {
+                "type": "button",
+                "name": "button1",
+                "action": "view3",
+                "row": "1",
+                "label": "Button 1",
+                "with": [
+                    "embed2"
+                ]
+            }
+        ]
+    },
+    "view3": {
+        "type": "view",
+        "components": [
+            {
+                "type": "button",
+                "name": "button1",
+                "action": "",
+                "row": "1",
+                "label": "Bouton 1",
+                "with": [
+                    "content1"
+                ]
+            }
+        ]
+    }
+}
