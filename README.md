@@ -39,7 +39,7 @@ Je vais essayer de faire simple et rapide avec des exemples :
 
 NB : pour la row (la ligne), la ligne 0 correspond à la ligne la plus haute dans discord.py, il peut y avoir un maximum de 5 lignes (row 4)
 
-Vd4dpy respecte l'ordre hiérarchique des éléments. Par exemple, le bouton le plus haut dans le code sera le plus à gauche dans la View. Les arguments à fournir sont les mêmes que pour un bouton basique de discord.py, voir la documentation de discord.py pour savoir lesquels sont disponibles.
+Vm4dpy respecte l'ordre hiérarchique des éléments. Par exemple, le bouton le plus haut dans le code sera le plus à gauche dans la View. Les arguments à fournir sont les mêmes que pour un bouton basique de discord.py, voir la documentation de discord.py pour savoir lesquels sont disponibles.
 
 ```yaml
 [embed1:embed]      ## Permet de créer un nouvel embed appelé "embed1". Les noms doivent être uniques
