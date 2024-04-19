@@ -14,13 +14,15 @@ Ce n'est que le début de ce projet et il reste de multiples fonctionnalités à
 - discord.py `pip install discord.py`
 - Nothing else!
 
-## How to use
+## Limitations
 
-Pour voir un exmeple :
-1. Clonez ce dépôt
-2. Exécutez `python main.py` dans le dossier cloné
+Pour le moment, vm4dpy ne prend en charge que les boutons, les SelectMenus seront bientôt disponibles
 
-### Syntax
+## Fonctionnement
+
+### Syntaxe
+
+Dans cette sous-partie vous verrez toutes les commandes et options disponibles sur vm4dpy.
 
 Je vais essayer de faire simple et rapide avec des exemples :
 
@@ -39,10 +41,12 @@ Je vais essayer de faire simple et rapide avec des exemples :
 
 NB : pour la row (la ligne), la ligne 0 correspond à la ligne la plus haute dans discord.py, il peut y avoir un maximum de 5 lignes (row 4)
 
-Vm4dpy respecte l'ordre hiérarchique des éléments. Par exemple, le bouton le plus haut dans le code sera le plus à gauche dans la View. Les arguments à fournir sont les mêmes que pour un bouton basique de discord.py, voir la documentation de discord.py pour savoir lesquels sont disponibles.
+Les arguments à fournir pour le bouton sont les mêmes que pour un bouton basique de discord.py, [voir la documentation de discord.py](https://discordpy.readthedocs.io/en/stable/interactions/api.html?highlight=button#discord.ui.Button) pour savoir lesquels sont disponibles.
+
+Vm4dpy respecte l'ordre hiérarchique des éléments. Par exemple, le bouton le plus haut dans le code sera le plus à gauche dans la View.
 
 ```yaml
-[embed1:embed]      ## Permet de créer un nouvel embed appelé "embed1". Les noms doivent être uniques
+[embed1:embed]      ## Permet de créer un nouvel embed appelé "embed1".
 $ content           ## Permet de créer le "corps" de l'embed
  | title: help      ## Ajoute une propriété "title" à l'embed
  | description: yes ## Ajoute une propriété "description" à l'embed
@@ -75,14 +79,14 @@ $ field
 
 ```yaml
 [content1:content]         ## Permet de créer un nouveau contenu appelé "content1"
-:start                     ## Permet de définir le début du contenu
+:start                     ## Début du contenu à la ligne suivante
 Bonjour je suis le contenu ## Ici vous pouvez écrire tout votre contenu, avec des sauts de ligne, etc...
 
 Avec un saut de ligne
-:end                       ## Permet de définir la fin du contenu. Le programme ne comptera pas ce qui suit comme faisant partie du contenu
+:end                       ## Fin du contenu
 ```
 
-Pour finir, vous devez délimiter chaque "item" (embed, view, content...) par "---" précédé et suivi, ou non, d'un saut de ligne. Par exemple :
+Pour finir, vous devez délimiter chaque classe (embed, view, content...) par "---" précédé et suivi, ou non, d'un saut de ligne. Par exemple :
 
 ```yaml
 [embed2:embed]
@@ -106,7 +110,80 @@ $ content
  * content1
 ```
 
+
+### Utilisation
+
+Pour utiliser vm4dpy :
+1. Créez un nouveau fichier qui sera le fichier avec votre View (vous pouvez l'appeler comme vous voulez)
+2. Écrivez vos Views dans ce fichier
+3. Ouvrez le fichier main.py puis modifiez le nom du fichier (ligne 22)
+4. Lancez le main.py (`py main.py`)
+
 Voilà c'est en gros tout ce que vous avez besoin de savoir sur Vm4dpy !
+
+### Explications en plus
+
+#### `[name:type]`
+Catégorie : classe
+Permet de créer une nouvelle classe vm4dpy (View, embed, content...)
+- `name` correspond au nom de l'élément, il doit être unique
+- `type` correspond au type de l'élément : `view`, `embed` ou `content`
+
+#### ` | key: value`
+Catégorie : arguments
+Permet de fixer une clé (key, un argument) à une valeur en fonction de la fonction (précisée avant la clé)
+- `key` représente la valeur à fixer dans la sous-partie, par exemple pour un bouton, une `key` peut être `label` (qui correspond à ce qui sera écrit sur le bouton)
+- `value` correspond à la valeur à attribuer à la clé. Cette valeur (et son type) dépend de la clé (il faut dans la plupart des cas se référer à [la documentation de discord.py](https://discordpy.readthedocs.io/en/stable/index.html))
+
+#### `> button_name {action}`
+Catégorie : bouton de view
+- Uniquement si le type de l'élément est sur `view` (sinon se sera ignoré)
+- `>` permet de créer un nouveau bouton (uniquement pour les Views)
+- `button_name` correspond au nom du bouton (il ne doit pas avoir d'espaces ou de caractères spéciaux, comme une fonction Python) et doit être unique **pour la view**
+- `{action}` c'est la view que doit afficher le bouton, il peut être définit sur `{}` pour n'afficher aucune View. `action` doit être le nom d'une view
+
+#### ` * show_classe`
+Catégorie : classe à afficher
+- Uniquement pour les boutons
+- Permet d'afficher un `content` ou `embed` quand le bouton est cliqué
+- `show_classe` : `content` ou `embed` à afficher
+- Exemple :
+```yaml
+> button2 {}
+ [...]
+ * embed2    ## Affiche l'embed2
+ * content1  ## Affiche le content1
+```
+
+#### `$ name`
+Catégorie : partie d'embed
+- Uniquement pour `embed`
+- Il permet de créer une partie d'un embed. Toutes les parties, clés et valeurs sont précisées ici :
+```yaml
+$ content
+ | title: texte
+ | description: texte
+ | color: code héxadécimal (type "#ff0000")
+ | url: https://site.com/path
+ | timestamp: 2024-04-17 20:46:21.343038
+$ medias
+ | thumbnail: https://site.com/path
+ | video: https://site.com/path
+ | image: https://site.com/path
+$ footer
+ | img: https://site.com/path
+ | text: Texte
+$ author
+ | text: Texte
+$ field
+ | name: Texte
+ | value: Texte
+ | inline: True ou False
+$ field
+ | name: Texte
+ | value: Texte
+ | inline: True ou Flase
+```
 
 ## Autres utilisations
 
