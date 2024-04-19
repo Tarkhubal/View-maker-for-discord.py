@@ -4,7 +4,11 @@ This little program lets you create Views for discord.py more easily using some 
 
 ## Introduction
 
-Vm4dpy vous permet de créer plus facilement des (bases de) Views pour discord.py en utilisant une sorte de langage qui peut sembler légèrement similaire au YAML. Ce langage (qui sera appelé "langage de Vm4dpy" dans ce document) est conçu pour être le plus facile possible à mettre en forme et à comprendre, tout en étant suffisamment puissant pour permettre la création de Views complexes.
+Vm4dpy vous permet de créer plus rapidement des bases de Views pour discord.py en utilisant une sorte de langage qui peut sembler légèrement similaire au YAML. Ce langage (qui sera appelé "langage de Vm4dpy" dans ce document) est conçu pour être le plus facile possible à mettre en forme et à comprendre, tout en étant suffisamment puissant pour permettre la création de Views complexes.
+
+Tout d'abord, Vm4dpy ne permet **pas** d'exécuter du code directement, il permet de créer des Views plus facilement et surtout plus rapidement en évitant des problèmes de Views qui n'existent pas. Le programme d'exemple du `main.py` vous permet de transformer votre "programme" Vm4dpy en un code Python lisible par discord.py.
+
+Vous devez donc copier le code en sortie du programme et l'inclure à votre bot manuellement.
 
 Ce n'est que le début de ce projet et il reste de multiples fonctionnalités à ajouter, d'autres à modifier, et des bugs à régler. Si vous avez des suggestions, des idées, des problèmes ou des questions, n'hésitez pas à les poser dans les issues de ce projet ou les proposer via un pull request !
 
@@ -113,9 +117,9 @@ $ content
 
 ### Utilisation
 
-Pour utiliser vm4dpy :
-1. Créez un nouveau fichier qui sera le fichier avec votre View (vous pouvez l'appeler comme vous voulez)
-2. Écrivez vos Views dans ce fichier
+Pour utiliser vm4dpy facilement :
+1. Créez un nouveau fichier qui sera le fichier avec le langage vm4dpy (vous pouvez l'appeler comme vous voulez)
+2. "Codez" vos views dans ce fichier
 3. Ouvrez le fichier main.py puis modifiez le nom du fichier (ligne 22)
 4. Lancez le main.py (`py main.py`)
 
