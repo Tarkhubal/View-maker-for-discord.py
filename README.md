@@ -24,97 +24,6 @@ Pour le moment, vm4dpy ne prend en charge que les boutons, les SelectMenus seron
 
 ## Fonctionnement
 
-### Syntaxe
-
-Dans cette sous-partie vous verrez toutes les commandes et options disponibles sur vm4dpy.
-
-Je vais essayer de faire simple et rapide avec des exemples :
-
-```yaml
-[view1:view]        ## Permet de créer une nouvelle View appelée "view1". Les noms doivent être uniques
-> button1 {view2}   ## Ajoute un nouveau bouton à la View "view1" qui affiche la View "view2" lorsqu'il est cliqué
- | label: Button 1  ## Ajoute une propriété "label" au bouton
- | emoji: 🔴        ## Ajoute un émoji au bouton  
- | row: 2           ## Ajoute le bouton à la troisième (oui 3ème, comme avec discord.py) ligne de la View
- * embed1           ## Quand il sera cliqué, afficher l'embed "embed1"... (voir ci-dessous)
- * content1         ## ... et le contenu "content1" (voir ci-dessous)
-> button2 {view3}   ## Ajoute un nouveau bouton à la View "view1" qui affiche la View "view3" lorsqu'il est cliqué
- | row: 1           ## Ajoute le bouton à la deuxième ligne de la View
- * embed2           ## Quand il sera cliqué, afficher l'embed "embed2"... (voir ci-dessous)
-```
-
-NB : pour la row (la ligne), la ligne 0 correspond à la ligne la plus haute dans discord.py, il peut y avoir un maximum de 5 lignes (row 4)
-
-Les arguments à fournir pour le bouton sont les mêmes que pour un bouton basique de discord.py, [voir la documentation de discord.py](https://discordpy.readthedocs.io/en/stable/interactions/api.html?highlight=button#discord.ui.Button) pour savoir lesquels sont disponibles.
-
-Vm4dpy respecte l'ordre hiérarchique des éléments. Par exemple, le bouton le plus haut dans le code sera le plus à gauche dans la View.
-
-```yaml
-[embed1:embed]      ## Permet de créer un nouvel embed appelé "embed1".
-$ content           ## Permet de créer le "corps" de l'embed
- | title: help      ## Ajoute une propriété "title" à l'embed
- | description: yes ## Ajoute une propriété "description" à l'embed
- | color: #ff0000   ## etc...
- | url: https://google.com
- | timestamp: 2024-04-17 20:46:21.343038
-$ medias            ## Permet de créer les "médias" de l'embed (images, vidéos, etc.)
- | thumbnail: https://img/img.png ## Pas besoin de préciser ce que ça fait...
- | video: https://video/video.mp4 ## À noter : vous ne pouvez pas pour le moment utiliser
- | image: https://img/img.png     ## des fichiers locaux pour les médias
-$ footer
- | img: https://img/img.png
- | text: bruh
-$ author
- | text: nope
-$ field                 ## À noter : les fields sont rangés dans l'ordre croissant, ce qui signifie
- | name: field1         ## que le field le plus haut sera le field le plus haut et le plus à gauche
- | value: value1 ok     ## sur Discord.
- | inline: True
-$ field
- | name: field2
- | value: value2 yay
- | inline: False
-$ field
- | name: field3
- | value: value3 mbeuuuh
- | inline: False
-
-```
-
-```yaml
-[content1:content]         ## Permet de créer un nouveau contenu appelé "content1"
-:start                     ## Début du contenu à la ligne suivante
-Bonjour je suis le contenu ## Ici vous pouvez écrire tout votre contenu, avec des sauts de ligne, etc...
-
-Avec un saut de ligne
-:end                       ## Fin du contenu
-```
-
-Pour finir, vous devez délimiter chaque classe (embed, view, content...) par "---" précédé et suivi, ou non, d'un saut de ligne. Par exemple :
-
-```yaml
-[embed2:embed]
-$ content
- | title: help
- | description: yes
- | color: #ff0000
-
----                  ## ici
-
-[view2:view]
-> button1 {view3}
- | row: 1
- | label: Button 1
- * embed2
----                  ## ici
-[view3:view]
-> button1 {view1}
- | row: 1
- | label: Bouton 1
- * content1
-```
-
-
 ### Utilisation
 
 Pour utiliser vm4dpy facilement :
@@ -125,7 +34,9 @@ Pour utiliser vm4dpy facilement :
 
 Voilà c'est en gros tout ce que vous avez besoin de savoir sur Vm4dpy !
 
-### Explications en plus
+### Syntaxe
+
+*(il y a des exemples plus bas)*
 
 #### `[name:type]`
 Catégorie : classe
@@ -189,6 +100,101 @@ $ field
  | name: Texte
  | value: Texte
  | inline: True ou Flase
+```
+
+### Exemples
+
+Dans cette sous-partie vous verrez des exemples d'utilisation
+
+#### Views (boutons...)
+
+```yaml
+[view1:view]        ## Permet de créer une nouvelle View appelée "view1". Les noms doivent être uniques
+> button1 {view2}   ## Ajoute un nouveau bouton à la View "view1" qui affiche la View "view2" lorsqu'il est cliqué
+ | label: Button 1  ## Ajoute une propriété "label" au bouton
+ | emoji: 🔴        ## Ajoute un émoji au bouton  
+ | row: 2           ## Ajoute le bouton à la troisième (oui 3ème, comme avec discord.py) ligne de la View
+ * embed1           ## Quand il sera cliqué, afficher l'embed "embed1"... (voir ci-dessous)
+ * content1         ## ... et le contenu "content1" (voir ci-dessous)
+> button2 {view3}   ## Ajoute un nouveau bouton à la View "view1" qui affiche la View "view3" lorsqu'il est cliqué
+ | row: 1           ## Ajoute le bouton à la deuxième ligne de la View
+ * embed2           ## Quand il sera cliqué, afficher l'embed "embed2"... (voir ci-dessous)
+```
+
+NB : pour la row (la ligne), la ligne 0 correspond à la ligne la plus haute dans discord.py, il peut y avoir un maximum de 5 lignes (row 4)
+
+Les arguments à fournir pour le bouton sont les mêmes que pour un bouton basique de discord.py, [voir la documentation de discord.py](https://discordpy.readthedocs.io/en/stable/interactions/api.html?highlight=button#discord.ui.Button) pour savoir lesquels sont disponibles.
+
+Vm4dpy respecte l'ordre hiérarchique des éléments. Par exemple, le bouton le plus haut dans le code sera le plus à gauche dans la View.
+
+#### Embeds
+
+```yaml
+[embed1:embed]      ## Permet de créer un nouvel embed appelé "embed1".
+$ content           ## Permet de créer le "corps" de l'embed
+ | title: help      ## Ajoute une propriété "title" à l'embed
+ | description: yes ## Ajoute une propriété "description" à l'embed
+ | color: #ff0000   ## etc...
+ | url: https://google.com
+ | timestamp: 2024-04-17 20:46:21.343038
+$ medias            ## Permet de créer les "médias" de l'embed (images, vidéos, etc.)
+ | thumbnail: https://img/img.png ## Pas besoin de préciser ce que ça fait...
+ | video: https://video/video.mp4 ## À noter : vous ne pouvez pas pour le moment utiliser
+ | image: https://img/img.png     ## des fichiers locaux pour les médias
+$ footer
+ | img: https://img/img.png
+ | text: bruh
+$ author
+ | text: nope
+$ field                 ## À noter : les fields sont rangés dans l'ordre croissant, ce qui signifie
+ | name: field1         ## que le field le plus haut sera le field le plus haut et le plus à gauche
+ | value: value1 ok     ## sur Discord.
+ | inline: True
+$ field
+ | name: field2
+ | value: value2 yay
+ | inline: False
+$ field
+ | name: field3
+ | value: value3 mbeuuuh
+ | inline: False
+```
+
+#### Contents
+
+```yaml
+[content1:content]         ## Permet de créer un nouveau contenu appelé "content1"
+:start                     ## Début du contenu à la ligne suivante
+Bonjour je suis le contenu ## Ici vous pouvez écrire tout votre contenu, avec des sauts de ligne, etc...
+
+Avec un saut de ligne
+:end                       ## Fin du contenu
+```
+
+#### Délimitations de classes
+
+Pour finir, vous devez délimiter chaque classe (embed, view, content...) par "---" précédé et suivi, ou non, d'un saut de ligne. Par exemple :
+
+```yaml
+[embed2:embed]
+$ content
+ | title: help
+ | description: yes
+ | color: #ff0000
+
+---                  ## ici
+
+[view2:view]
+> button1 {view3}
+ | row: 1
+ | label: Button 1
+ * embed2
+---                  ## ici
+[view3:view]
+> button1 {view1}
+ | row: 1
+ | label: Bouton 1
+ * content1
 ```
 
 ## Autres utilisations
