@@ -125,12 +125,14 @@ Voilà c'est en gros tout ce que vous avez besoin de savoir sur Vm4dpy !
 
 #### `[name:type]`
 Catégorie : classe
+
 Permet de créer une nouvelle classe vm4dpy (View, embed, content...)
 - `name` correspond au nom de l'élément, il doit être unique
 - `type` correspond au type de l'élément : `view`, `embed` ou `content`
 
 #### ` | key: value`
 Catégorie : arguments
+
 Permet de fixer une clé (key, un argument) à une valeur en fonction de la fonction (précisée avant la clé)
 - `key` représente la valeur à fixer dans la sous-partie, par exemple pour un bouton, une `key` peut être `label` (qui correspond à ce qui sera écrit sur le bouton)
 - `value` correspond à la valeur à attribuer à la clé. Cette valeur (et son type) dépend de la clé (il faut dans la plupart des cas se référer à [la documentation de discord.py](https://discordpy.readthedocs.io/en/stable/index.html))
