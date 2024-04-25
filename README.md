@@ -19,113 +19,110 @@ Ce n'est que le début de ce projet et il reste de multiples fonctionnalités à
 - Nothing else!
 
 ## Limitations
+Currently vm4dpy only supports buttons, SelectMenus will be available soon
 
-Pour le moment, vm4dpy ne prend en charge que les boutons, les SelectMenus seront bientôt disponibles
+## How it works
+### Use
+To use vm4dpy easily:
 
-## Fonctionnement
+1. Create a new file which will be the file with the vm4dpy language (you can call it whatever you want)
+2. “Code” your views in this file
+3. Open the main.py file then modify the file name (line 22)
+4. Run the main.py (py main.py)
 
-### Utilisation
+That's basically all you need to know about Vm4dpy!
 
-Pour utiliser vm4dpy facilement :
-1. Créez un nouveau fichier qui sera le fichier avec le langage vm4dpy (vous pouvez l'appeler comme vous voulez)
-2. "Codez" vos views dans ce fichier
-3. Ouvrez le fichier main.py puis modifiez le nom du fichier (ligne 22)
-4. Lancez le main.py (`py main.py`)
+### Syntax
 
-Voilà c'est en gros tout ce que vous avez besoin de savoir sur Vm4dpy !
-
-### Syntaxe
-
-*(il y a des exemples plus bas)*
+*(there are examples below)*
 
 #### `[name:type]`
-Catégorie : classe
+Category: class
 
-Permet de créer une nouvelle classe vm4dpy (View, embed, content...)
-- `name` correspond au nom de l'élément, il doit être unique
-- `type` correspond au type de l'élément : `view`, `embed` ou `content`
+Allows you to create a new vm4dpy class (View, embed, content...)
+- `name` matches the name of the element, it must be unique
+- `type` corresponds to the type of the element: `view`, `embed` or `content`
 
 #### ` | key: value`
-Catégorie : arguments
-
-Permet de fixer une clé (key, un argument) à une valeur en fonction de la fonction (précisée avant la clé)
-- `key` représente la valeur à fixer dans la sous-partie, par exemple pour un bouton, une `key` peut être `label` (qui correspond à ce qui sera écrit sur le bouton)
-- `value` correspond à la valeur à attribuer à la clé. Cette valeur (et son type) dépend de la clé (il faut dans la plupart des cas se référer à [la documentation de discord.py](https://discordpy.readthedocs.io/en/stable/index.html))
+Category: arguments
+Allows you to set a key (key = an argument) to a value depending on the function (specified before the key)
+- `key` represents the value to set in the sub-part, for example for a button, a `key` can be `label` (which corresponds to what will be written on the button)
+- `value` corresponds to the value to assign to the key. This value (and its type) depends on the key (in most cases you must refer to [the discord.py documentation](https://discordpy.readthedocs.io/en/stable/index.html))
 
 #### `> button_name {action}`
-Catégorie : bouton de view
-- Uniquement si le type de l'élément est sur `view` (sinon se sera ignoré)
-- `>` permet de créer un nouveau bouton (uniquement pour les Views)
-- `button_name` correspond au nom du bouton (il ne doit pas avoir d'espaces ou de caractères spéciaux, comme une fonction Python) et doit être unique **pour la view**
-- `{action}` c'est la view que doit afficher le bouton, il peut être définit sur `{}` pour n'afficher aucune View. `action` doit être le nom d'une view
+Category: view button
+- Only if the class type is `view` (otherwise it will be ignored)
+- `>` allows you to create a new button (only for Views)
+- `button_name` matches the name of the button (it must not have spaces or special characters, like a Python function) and must be unique **for the view**
+- `{action}` is the view that the button should display, it can be set to `{}` to not display any View. `action` must be the name of a view
 
-#### ` * show_classe`
-Catégorie : classe à afficher
-- Uniquement pour les boutons
-- Permet d'afficher un `content` ou `embed` quand le bouton est cliqué
-- `show_classe` : `content` ou `embed` à afficher
-- Exemple :
+#### ` * show_class`
+Category: class to display
+- Only for buttons
+- Allows you to display `content` or `embed` when the button is clicked
+- `show_class`: `content` or `embed` classes to display
+- Example :
 ```yaml
 > button2 {}
- [...]
- * embed2    ## Affiche l'embed2
- * content1  ## Affiche le content1
+  [...]
+  * embed2 ## Displays the embed2
+  * content1 ## Displays content1
 ```
 
-#### `$ name`
-Catégorie : partie d'embed
-- Uniquement pour `embed`
-- Il permet de créer une partie d'un embed. Toutes les parties, clés et valeurs sont précisées ici :
+#### `$name`
+Category: embed part
+- Only for `embed`
+- It allows you to create part of an embed. All parts, keys and values are specified here:
 ```yaml
-$ content
- | title: texte
- | description: texte
- | color: code héxadécimal (type "#ff0000")
- | url: https://site.com/path
- | timestamp: 2024-04-17 20:46:21.343038
-$ medias
- | thumbnail: https://site.com/path
- | video: https://site.com/path
- | image: https://site.com/path
-$ footer
- | img: https://site.com/path
- | text: Texte
-$ author
- | text: Texte
-$ field
- | name: Texte
- | value: Texte
- | inline: True ou False
-$ field
- | name: Texte
- | value: Texte
- | inline: True ou Flase
+$happy
+  | title: text
+  | description: text
+  | color: hexadecimal code (type "#ff0000")
+  | url: https://site.com/path
+  | timestamp: 2024-04-17 20:46:21.343038
+$media
+  | thumbnail: https://site.com/path
+  | video: https://site.com/path
+  | image: https://site.com/path
+$footer
+  | img: https://site.com/path
+  | text: Text
+$author
+  | text: Text
+$field
+  | name: Text
+  | value: Text
+  | inline: True or False
+$field     ## Another field
+  | name: Text
+  | value: Text
+  | inline: True or Flase
 ```
 
-### Exemples
+### Examples
 
-Dans cette sous-partie vous verrez des exemples d'utilisation
+In this subsection you will see examples of use
 
-#### Views (boutons...)
+#### Views (buttons...)
 
 ```yaml
-[view1:view]        ## Permet de créer une nouvelle View appelée "view1". Les noms doivent être uniques
-> button1 {view2}   ## Ajoute un nouveau bouton à la View "view1" qui affiche la View "view2" lorsqu'il est cliqué
- | label: Button 1  ## Ajoute une propriété "label" au bouton
- | emoji: 🔴        ## Ajoute un émoji au bouton  
- | row: 2           ## Ajoute le bouton à la troisième (oui 3ème, comme avec discord.py) ligne de la View
- * embed1           ## Quand il sera cliqué, afficher l'embed "embed1"... (voir ci-dessous)
- * content1         ## ... et le contenu "content1" (voir ci-dessous)
-> button2 {view3}   ## Ajoute un nouveau bouton à la View "view1" qui affiche la View "view3" lorsqu'il est cliqué
- | row: 1           ## Ajoute le bouton à la deuxième ligne de la View
- * embed2           ## Quand il sera cliqué, afficher l'embed "embed2"... (voir ci-dessous)
+[view1:view]        ## Allows you to create a new View called "view1". Names must be unique
+> button1 {view2}   ## Adds a new button to View "view1" that displays View "view2" when clicked
+  | label: Button 1 ## Adds a "label" property to the button with value "Button 1"
+  | emoji: 🔴       ## Adds an emoji to the button
+  | row: 2          ## Adds the button to the third (yes 3rd, like with discord.py) row of the View
+  * embed1          ## When clicked, display the embed "embed1"... (see below)
+  * content1        ## ... and the content "content1" (see below)
+> button2 {view3}   ## Adds a new button to View "view1" that displays View "view3" when clicked
+  | row: 1          ## Adds the button to the second row of the View
+  * embed2          ## When clicked, display the embed "embed2"... (see below)
 ```
 
-NB : pour la row (la ligne), la ligne 0 correspond à la ligne la plus haute dans discord.py, il peut y avoir un maximum de 5 lignes (row 4)
+NB: for the row, line 0 corresponds to the highest line in discord.py, there can be a maximum of 5 lines (row 4)
 
-Les arguments à fournir pour le bouton sont les mêmes que pour un bouton basique de discord.py, [voir la documentation de discord.py](https://discordpy.readthedocs.io/en/stable/interactions/api.html?highlight=button#discord.ui.Button) pour savoir lesquels sont disponibles.
+The arguments to provide for the button are the same as for a basic discord.py button, [see the discord.py documentation](https://discordpy.readthedocs.io/en/stable/interactions/api.html? highlight=button#discord.ui.Button) to see which ones are available.
 
-Vm4dpy respecte l'ordre hiérarchique des éléments. Par exemple, le bouton le plus haut dans le code sera le plus à gauche dans la View.
+Vm4dpy respects the hierarchical order of elements. For example, the topmost button in the code will be the leftmost in the View.
 
 #### Embeds
 
@@ -197,9 +194,9 @@ $ content
  * content1
 ```
 
-## Autres utilisations
+## Other uses
 
-Vous pouvez également utiliser certaines fonctions de Vm4dpy pour créer par exemple des embeds "plus rapidement". La fonction "parse_embed" de "parse_text.py" vous permet d'analyser un texte au format vm4dpy et de vous renvoyer un dictionnaire qui peut être traité par "generate_embed" de "render_view.py" pour créer un embed discord.py. Exemple :
+You can also use certain Vm4dpy functions to create embeds "faster", for example. The "parse_embed" function of "parse_text.py" allows you to parse text in vm4dpy format and return you a dictionary which can be processed by "generate_embed" of "render_view.py" to create a discord.py embed. Example :
 
 ```python
 from vm4dpy.parse_text import parse_embed
